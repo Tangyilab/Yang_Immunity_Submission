@@ -1,6 +1,8 @@
 # Description
 
-This repository provides an end-to-end workflow for bulk RNA-seq analysis in mouse models, focusing on differential gene expression and functional interpretation. The pipeline includes:
+This repository provides an end-to-end workflow for bulk RNA-seq analysis in mouse models, focusing on differential gene expression and functional interpretation. 
+
+# The pipeline includes:
 
 ## Data Preprocessing
 
