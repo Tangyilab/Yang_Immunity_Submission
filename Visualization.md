@@ -203,3 +203,86 @@ pheatmap(mat,
          scale = "row")
 dev.off()
 ```
+# ===========================
+## Step 3: GSEA Visualization
+# ===========================
+
+```R
+
+deg$external_gene_name = rownames(deg)
+deg <- deg[deg$Status!='NotSig',]
+DEG = deg[,c('external_gene_name','log2FoldChange','pvalue')]
+head(DEG)
+DEG <- DEG[order(DEG$log2FoldChange, decreasing = T),]
+genelist <- DEG$log2FoldChange
+names(genelist) <- DEG$external_gene_name
+
+res_all <- GSEA(
+  genelist,
+  TERM2GENE = geneset,
+  pvalueCutoff = 1,
+  BPPARAM   = SerialParam()  # 串行执行
+)
+
+res_all_df = as.data.frame(res_all)
+write.csv(as.data.frame(res_all),file = 'ALL_KO_WT_GSEA.csv')
+deg$external_gene_name = rownames(deg)
+deg <- deg[deg$Status!='NotSig',]
+DEG = deg[,c('external_gene_name','log2FoldChange','pvalue')]
+head(DEG)
+DEG <- DEG[order(DEG$log2FoldChange, decreasing = T),]
+genelist <- DEG$log2FoldChange
+names(genelist) <- DEG$external_gene_name
+
+res_all <- GSEA(
+  genelist,
+  TERM2GENE = geneset,
+  pvalueCutoff = 1,
+  BPPARAM   = SerialParam()  # 串行执行
+)
+res_all_df = as.data.frame(res_all)
+write.csv(as.data.frame(res_all),file = 'ALL_KO_WT_GSEA.csv')
+
+Terms = c(
+    "GOBP_INTERLEUKIN_4_PRODUCTION",  #KO
+    "GOBP_NEGATIVE_REGULATION_OF_VASCULATURE_DEVELOPMENT",  #KO
+    "GOBP_POSITIVE_REGULATION_OF_CD4_POSITIVE_ALPHA_BETA_T_CELL_ACTIVATION",  #KO
+    "GOBP_INFLAMMATORY_CELL_APOPTOTIC_PROCESS",  #KO
+    "GOBP_POSITIVE_REGULATION_OF_REGULATORY_T_CELL_DIFFERENTIATION",   #WT
+    "GOBP_NEGATIVE_REGULATION_OF_PRODUCTION_OF_MOLECULAR_MEDIATOR_OF_IMMUNE_RESPONSE",  #WT
+    "GOBP_NEGATIVE_REGULATION_OF_CYTOKINE_PRODUCTION_INVOLVED_IN_INFLAMMATORY_RESPONSE",   #WT
+    "GOBP_NEGATIVE_REGULATION_OF_PLATELET_ACTIVATION"
+)
+matched_rows <- res_all[grepl(paste(Terms, collapse = "|"), res_all$ID), ]
+colnames(matched_rows)
+
+devtools::install_github("junjunlab/GseaVis")
+library(GseaVis)
+head(res_all)
+gseaNb(object = res_all,geneSetID ='GOBP_POSITIVE_REGULATION_OF_ACUTE_INFLAMMATORY_RESPONSE')
+
+colors = colorRampPalette(c(
+    "#376795", "#72BCD5", "#AADCE0", "white",
+    "#FFE6B7", "#F7AA58", "#E76254"
+  ))(100)
+#08519C", "#A50F15"
+genesets= c(
+'GOBP_POSITIVE_REGULATION_OF_ACUTE_INFLAMMATORY_RESPONSE',
+'GOBP_SPROUTING_ANGIOGENESIS',
+'GOBP_POSITIVE_REGULATION_OF_IMMUNE_EFFECTOR_PROCESS'
+,
+'GOBP_NEGATIVE_REGULATION_OF_VASCULATURE_DEVELOPMENT'
+)
+p = gseaNb(object = res_all,geneSetID =genesets,subPlot = 2,
+       #addPval = T,pvalX = 0.05,pvalY = 0.05,
+       rmHt = F,htHeight = 0.5,htCol = c('#376795','#E76254') ,termWidth = 35,legend.position =c(0.8,0.7) ,
+       curveCol = c("#84a494", "#dc6c4c", "#645cac","#d4c464"))
+p +
+  xlab("Trem2 KO - WT") +      # 修改 X 轴标签
+  ylab("Enrichment Score") +    # 修改 Y 轴标签
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # 如果需要旋转 X 轴标签，可以加上这个
+p
+ggsave("GSEA_Vis.pdf",width = 8,height = 5)
+
+```
+
