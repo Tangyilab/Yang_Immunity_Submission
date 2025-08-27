@@ -209,6 +209,13 @@ dev.off()
 
 ```R
 
+library(clusterProfiler)
+library(BiocParallel)
+library(devtools)
+library(GseaVis)
+library(dplyr)
+library(ggplot2)
+deg<-res
 deg$external_gene_name = rownames(deg)
 deg <- deg[deg$Status!='NotSig',]
 DEG = deg[,c('external_gene_name','log2FoldChange','pvalue')]
