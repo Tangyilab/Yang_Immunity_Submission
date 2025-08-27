@@ -1,4 +1,8 @@
-#####Volcano Plot
+# Bulk RNA-seq Visualization Workflow
+
+## Step 1: Volcano Plot
+
+
 ```R
 library(org.Mm.eg.db)
 library(tidyverse)
@@ -140,7 +144,7 @@ dev.off()
 
 ```
 # ===========================
-# Heatmap Visualization
+## Step 2: Heatmap Visualization
 # ===========================
 
 ```R
