@@ -228,7 +228,7 @@ res_all <- GSEA(
   genelist,
   TERM2GENE = geneset,
   pvalueCutoff = 1,
-  BPPARAM   = SerialParam()  # 串行执行
+  BPPARAM   = SerialParam()  
 )
 
 res_all_df = as.data.frame(res_all)
@@ -245,7 +245,7 @@ res_all <- GSEA(
   genelist,
   TERM2GENE = geneset,
   pvalueCutoff = 1,
-  BPPARAM   = SerialParam()  # 串行执行
+  BPPARAM   = SerialParam()  
 )
 res_all_df = as.data.frame(res_all)
 write.csv(as.data.frame(res_all),file = 'ALL_KO_WT_GSEA.csv')
@@ -285,10 +285,9 @@ p = gseaNb(object = res_all,geneSetID =genesets,subPlot = 2,
        rmHt = F,htHeight = 0.5,htCol = c('#376795','#E76254') ,termWidth = 35,legend.position =c(0.8,0.7) ,
        curveCol = c("#84a494", "#dc6c4c", "#645cac","#d4c464"))
 p +
-  xlab("Trem2 KO - WT") +      # 修改 X 轴标签
-  ylab("Enrichment Score") +    # 修改 Y 轴标签
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # 如果需要旋转 X 轴标签，可以加上这个
-p
+  xlab("Trem2 KO - WT") +      
+  ylab("Enrichment Score") +    
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 ggsave("GSEA_Vis.pdf",width = 8,height = 5)
 
 ```
