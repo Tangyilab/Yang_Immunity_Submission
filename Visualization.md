@@ -148,7 +148,7 @@ library(pheatmap)
 library(tidyverse)
 
 total_condition <- read.csv("condition.csv", header = TRUE, row.names = 1)
-raw_count <- read.csv("test.csv", header = TRUE, row.names = 1)
+raw_count <- read.csv("total_count_RNAseq.csv", header = TRUE, row.names = 1)
 raw_count2 <- raw_count[, -c(2,3)]
 
 raw_count2_summarized <- raw_count2 %>%
