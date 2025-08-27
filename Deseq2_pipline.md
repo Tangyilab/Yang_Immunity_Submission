@@ -94,11 +94,11 @@ condition_vector <- total_condition[samples, , drop = FALSE]$condition
 log_counts <- log2(raw_count2 + 1)
 log_counts_t <- t(log_counts)
 log_counts_scaled <- scale(log_counts_t)
-
+#PCA plot of total counts
 pca_result <- prcomp(log_counts_scaled, center = TRUE, scale. = TRUE)
 pca_df <- as.data.frame(pca_result$x[, 1:2])
 pca_df$Condition <- condition_vector
-
+#UMAP plot of total counts
 umap_result <- umap(log_counts_scaled)
 umap_df <- as.data.frame(umap_result$layout)
 colnames(umap_df) <- c("UMAP1", "UMAP2")
