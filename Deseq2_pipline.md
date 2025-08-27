@@ -109,7 +109,7 @@ umap_df$Condition <- condition_vector
 
 ## Step 3: Group-Specific Analysis
 
-### Example: old Mouse Group
+### Example: Old Mouse Group
 
 ```R
 condition <- subset(total_condition, total_condition$condition %in% c("TREM2_WT-old", "TREM2_KO-old"))
@@ -128,9 +128,9 @@ pca_df <- as.data.frame(pca_result$x[, 1:2])
 pca_df$Condition <- condition_vector
 ```
 
-### Example: Old Mouse Group
+### Example: Young Mouse Group
 
-(Same workflow applied, using conditions `TREM2_WT-old` and `TREM2_KO-old`).
+(Same workflow applied, using conditions `TREM2_WT-young` and `TREM2_KO-young`).
 
 ---
 
