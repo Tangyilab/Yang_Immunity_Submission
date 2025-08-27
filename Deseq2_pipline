@@ -67,10 +67,10 @@ umap_df$Condition <- condition_vector
 
 ## Step 3: Group-Specific Analysis
 
-### Example: Young Mouse Group
+### Example: old Mouse Group
 
 ```R
-condition <- subset(total_condition, total_condition$condition %in% c("TREM2_WT-young", "TREM2_KO-young"))
+condition <- subset(total_condition, total_condition$condition %in% c("TREM2_WT-old", "TREM2_KO-old"))
 raw_count2 <- raw_count2[, row.names(condition)]
 raw_count2 <- raw_count2[rowSums(raw_count2) > 0, ]
 
