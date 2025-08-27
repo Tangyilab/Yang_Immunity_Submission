@@ -1,9 +1,14 @@
-Description
+#Description
+
 This repository provides an end-to-end workflow for bulk RNA-seq analysis in mouse models, focusing on differential gene expression and functional interpretation. The pipeline includes:
-Data Preprocessing
+
+##Data Preprocessing
+
 Convert raw .tab files to .csv using Python.
 Summarize gene counts and clean metadata in R.
-Exploratory Analysis
+
+##Exploratory Analysis
+
 Perform PCA and UMAP to assess sample distribution.
 Identify and remove outlier samples to improve clustering.
 Differential Expression Analysis
