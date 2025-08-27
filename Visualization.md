@@ -1,5 +1,11 @@
+#####Volcano Plot
+```R
 library(org.Mm.eg.db)
 library(tidyverse)
+library(ggplot2)
+library(ggrepel)
+library(clusterProfiler)
+library(dplyr)
 
 # Define GO IDs and corresponding annotation terms
 go_ids <- c("GO:0006935", "GO:0001935", "GO:0010573")
@@ -41,9 +47,6 @@ DEG_UP_young <- DEG_UP_young %>%
     TRUE ~ status_base
   )) %>%
   dplyr::select(-status_base, -status.y)
-
-library(ggplot2)
-library(ggrepel)
 
 # Remove NA rows
 df <- na.omit(DEG_UP_young)
@@ -135,9 +138,14 @@ ggplot(df, aes(x = log2FoldChange, y = -log10(pvalue), color = status)) +
   )
 dev.off()
 
+```
 # ===========================
 # Heatmap Visualization
 # ===========================
+
+```R
+library(pheatmap)
+library(tidyverse)
 
 total_condition <- read.csv("condition.csv", header = TRUE, row.names = 1)
 raw_count <- read.csv("test.csv", header = TRUE, row.names = 1)
@@ -166,7 +174,7 @@ DEG_UP_young2 <- subset(DEG_UP_young2, status != "Up")
 heatmap_gene <- unique(DEG_UP_young2$GeneID)
 raw_count3 <- raw_count2[heatmap_gene, ]
 
-library(pheatmap)
+
 
 # Prepare matrix and annotation
 mat <- as.matrix(raw_count3)
@@ -190,3 +198,4 @@ pheatmap(mat,
          fontsize_col = 8,
          scale = "row")
 dev.off()
+```
