@@ -10,7 +10,7 @@ import os
 
 os.chdir("E:/GSE134031_DST120 (1).tab/")
 data = pd.read_csv("GSE134031_DST120.tab", sep="\t")
-data.to_csv("test.csv")
+data.to_csv("total_count_RNAseq.csv")
 ```
 
 ### Preprocessing with R (dplyr)
@@ -20,7 +20,7 @@ library(DESeq2)
 library(dplyr)
 
 total_condition <- read.csv("condition.csv", header = TRUE, row.names = 1)
-raw_count <- read.csv("test.csv", header = TRUE, row.names = 1)
+raw_count <- read.csv("total_count_RNAseq.csv", header = TRUE, row.names = 1)
 raw_count2 <- raw_count[, -c(2,3)]
 
 raw_count2_summarized <- raw_count2 %>%
@@ -36,12 +36,54 @@ raw_count2$mgi_symbol <- NULL
 
 ## Step 2: Exploratory Data Analysis
 
+
+
+
+
+####condition
+```powershell
+PS E:\GSE134031_DST120 (1).tab> Get-Content condition.csv
+,condition
+IL1_M,TREM2_WT-young
+IL10_M,TREM2_KO-young
+IL11_M,TREM2_WT-old
+IL12_M,TREM2_KO-old
+IL13_M,TREM2_WT-young
+IL14_M,TREM2_KO-young
+IL15_M,TREM2_WT-old
+IL16_M,TREM2_KO-old
+IL17_M,TREM2_WT-young
+IL18_M,TREM2_KO-young
+IL19_M,TREM2_WT-old
+IL2_M,TREM2_KO-young
+IL20_M,TREM2_KO-old
+IL21_M,TREM2_WT-young
+IL22_M,TREM2_KO-young
+IL23_M,TREM2_WT-old
+IL24_M,TREM2_KO-old
+IL25_M,TREM2_WT-young
+IL26_M,TREM2_KO-young
+IL27_M,TREM2_WT-old
+IL28_M,TREM2_KO-old
+IL3_M,TREM2_WT-old
+IL4_M,TREM2_KO-old
+IL5_M,TREM2_WT-young
+IL6_M,TREM2_KO-young
+IL7_M,TREM2_WT-old
+IL8_M,TREM2_KO-old
+IL9_M,TREM2_WT-young
+
+
+```
+
 ### PCA and UMAP
 
 ```R
 library(data.table)
 library(ggplot2)
 library(umap)
+
+
 
 raw_count2 <- raw_count2[, row.names(total_condition)]
 raw_count2 <- raw_count2[rowSums(raw_count2) > 0, ]
