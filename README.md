@@ -2,6 +2,10 @@
 
 This repository provides an end-to-end workflow for bulk RNA-seq analysis in mouse models, focusing on differential gene expression and functional interpretation. 
 
+This repository contains the dataset and analysis scripts associated with the reanalysis of GEO: GSE98969 and GSE130627.
+
+We only analyzed data from young and old Trem2-KO and WT mice.
+
 # The pipeline includes:
 
 ## Data Preprocessing
