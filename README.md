@@ -8,7 +8,7 @@ We only analyzed data from young and old Trem2-KO and WT mice.
 
 # The pipeline includes:
 
-## Data Preprocessing（https://github.com/Tangyilab/Yang_Immunity_Submission/blob/main/Deseq2_pipline.md）
+## Data Preprocessing
 
 Convert raw .tab files to .csv using Python.
 
